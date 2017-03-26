@@ -10,8 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Company_home extends AppCompatActivity {
-
+public class Tutor extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
     NavigationView mNavigationView;
     FragmentManager mFragmentManager;
@@ -20,7 +19,7 @@ public class Company_home extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_company_home);
+        setContentView(R.layout.activity_tutor);
 
         /**
          *Setup the DrawerLayout and NavigationView
@@ -36,7 +35,7 @@ public class Company_home extends AppCompatActivity {
 
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
-        mFragmentTransaction.replace(R.id.containerView,new CompanyTabFragment()).commit();
+        mFragmentTransaction.replace(R.id.containerView,new TutorTabFragment()).commit();
         /**
          * Setup click events on the Navigation View Items.
          */
@@ -46,23 +45,44 @@ public class Company_home extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 mDrawerLayout.closeDrawers();
 
-
-
                 if (menuItem.getItemId() == R.id.nav_item_home) {
                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView,new CompanyTabFragment()).commit();
+                    fragmentTransaction.replace(R.id.containerView,new TutorTabFragment()).commit();
 
                 }
 
                 if (menuItem.getItemId() == R.id.nav_item_profile) {
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.containerView,new CompanyProfileFragment()).commit();
+                    xfragmentTransaction.replace(R.id.containerView,new TutorProfileFragment()).commit();
                 }
 
-                if(menuItem.getItemId() == R.id.nav_item_coursetrends) {
+                if(menuItem.getItemId() == R.id.nav_item_courses) {
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.containerView,new CourseTrendFragment()).commit();
+                    xfragmentTransaction.replace(R.id.containerView,new CourseFragment()).commit();
                 }
+
+
+                if(menuItem.getItemId() == R.id.nav_item_evaluation) {
+                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+                    xfragmentTransaction.replace(R.id.containerView,new TutorEvaluationFragment()).commit();
+                }
+
+                if(menuItem.getItemId() == R.id.nav_item_student_analysis) {
+                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+                    xfragmentTransaction.replace(R.id.containerView,new StudentAnalysisFragment()).commit();
+                }
+
+
+                if(menuItem.getItemId() == R.id.nav_item_job_analysis) {
+                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+                    xfragmentTransaction.replace(R.id.containerView,new JobAnalysisFragment()).commit();
+                }
+
+                if(menuItem.getItemId() == R.id.nav_item_edit_courses) {
+                    FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+                    xfragmentTransaction.replace(R.id.containerView,new EditCourseFragment()).commit();
+                }
+
 
                 return false;
             }

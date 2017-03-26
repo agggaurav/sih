@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <EditText
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:hint="Job Description"
+    android:layout_margin="5dp"
+    android:id="@+id/description"
+    />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Location"
+        android:layout_margin="5dp"
+        android:id="@+id/location"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="jobs available"
+        android:layout_margin="5dp"
+        android:id="@+id/vacancies"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="perks"
+        android:layout_margin="5dp"
+        android:id="@+id/stipend"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+    android:layout_width="150dp"
+    android:layout_height="50dp"
+    android:hint="skill required"
+    android:layout_margin="5dp"
+    android:id="@+id/skills_require"/>
+
+    <Button
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:id="@+id/addskill"/>
+
+
+</LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/skillset"/>
+
+    <Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Submit"
+    android:id="@+id/create_job"/>
+</LinearLayout>
+</ScrollView>

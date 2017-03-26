@@ -8,5 +8,6 @@
     <string name="title_logo">NATIONAL GEOGRAPHIC</string>
     <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
     <string name="title_activity_company_home">Company_home</string>
+    <string name="title_activity_tutor">Tutor</string>
 
 </resources>

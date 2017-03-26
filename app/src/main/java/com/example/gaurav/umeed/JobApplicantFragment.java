@@ -1,6 +1,5 @@
 package com.example.gaurav.umeed;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -26,21 +24,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Created by Ratan on 7/29/2015.
+ * Created by Gaurav on 25-03-2017.
  */
-public class CourseFragment extends Fragment {
+public class JobApplicantFragment extends Fragment {
 
-    ArrayList<CourseModel> data=new ArrayList<CourseModel>();
+    ArrayList<ApplicantModel> data=new ArrayList<ApplicantModel>();
     ListView lv;
-    EditText searchcourse;
-    Button searchbtn;
-    public String load_courses =Constants.ip;// "http://192.168.1.101:8000/loadcourses/";
+    public String load_applicants =Constants.ip;// "http://192.168.1.101:8000/loadcourses/";
     String jsonResponse;
-    CourseAdapter arrayAdapter;
+    ApplicantAdapter arrayAdapter;
 
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
@@ -51,45 +46,41 @@ public class CourseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 
-        View view = inflater.inflate(R.layout.primary_layout, container, false);
-        load_courses=Constants.ip;
-        load_courses=load_courses+"loadcourses/";
-        lv=(ListView)view.findViewById(R.id.list_course);
-        searchcourse=(EditText)view.findViewById(R.id.search_course);
-        searchbtn=(Button)view.findViewById(R.id.coursebtn);
-        data=new ArrayList<CourseModel>();
+        View view = inflater.inflate(R.layout.jobapplicant_layout, container, false);
+
+        lv=(ListView)view.findViewById(R.id.applicantlist);
+        data=new ArrayList<ApplicantModel>();
         //data.add("css");
         //data.add("php");
-        arrayAdapter =new CourseAdapter(data,getActivity());
+        ArrayList<String> interests=new ArrayList<String>();
+        interests.add("ml");
+        interests.add("big data");
+        ArrayList<String> skills=new ArrayList<String>();
+        skills.add("python");
+        ApplicantModel a=new ApplicantModel("1","Gaurav","Noida",interests,skills);
+        data.add(a);
+        arrayAdapter =new ApplicantAdapter(data,getActivity());
         lv.setAdapter(arrayAdapter);
-        getCourses();
-        searchbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String searchtext = searchcourse.getText().toString();
-               // data.add(searchtext);
-                arrayAdapter.notifyDataSetChanged();
-            }
-        });
-
+        arrayAdapter.notifyDataSetChanged();
+        //getApplicants();
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View v, int position,
                                     long arg3) {
-               //Intent module=new Intent(getActivity(),ModuleFragment.class);
+                //Intent module=new Intent(getActivity(),ModuleFragment.class);
                 //startActivity(module);
                 mFragmentManager = getActivity().getSupportFragmentManager();
                 mFragmentTransaction = mFragmentManager.beginTransaction();
 
                 Bundle bundles = new Bundle();
-                CourseModel cm =(CourseModel) adapter.getItemAtPosition(position);
-                bundles.putParcelable("cm", cm);
+                ApplicantModel am =(ApplicantModel) adapter.getItemAtPosition(position);
+                bundles.putParcelable("cm", am);
                 //bundles.putSerializable("cm", cm);
-                ModulelistFragment ldf = new ModulelistFragment ();
-               // Bundle args = new Bundle();
-               // args.putString("coursename",a);
-               ldf.setArguments(bundles);
+                ApplicantFragment ldf = new ApplicantFragment ();
+                // Bundle args = new Bundle();
+                // args.putString("coursename",a);
+                ldf.setArguments(bundles);
                 mFragmentTransaction.replace(R.id.containerView, ldf);
                 mFragmentTransaction.addToBackStack(null);
                 mFragmentTransaction.commit();
@@ -97,22 +88,14 @@ public class CourseFragment extends Fragment {
                 // do what you intend to do on click of listview row
             }
         });
+
         return view;
-
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        //ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(),R.array.Planets, android.R.layout.simple_list_item_1);
-        //setListAdapter(adapter);
-        //getListView().setOnItemClickListener(this);
-    }
-
-
-    public void getCourses()
+    public void getApplicants()
     {
-        JsonArrayRequest req = new JsonArrayRequest(load_courses,
+
+        JsonArrayRequest req = new JsonArrayRequest(load_applicants,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -134,8 +117,8 @@ public class CourseFragment extends Fragment {
                                 jsonResponse += "Name: " + name + "\n\n";
                                 jsonResponse += "Founder: " + fname + "\n\n";
                                 jsonResponse += "Category: " + category + "\n\n";
-                                CourseModel cm=new CourseModel(fname,name,category);
-                               data.add(cm);
+                                //ApplicantModel cm=new ApplicantModel("1",fname,name,category);
+                                //data.add(cm);
                                 arrayAdapter.notifyDataSetChanged();
                             }
 
@@ -162,6 +145,7 @@ public class CourseFragment extends Fragment {
         AppController.getInstance().addToRequestQueue(req);
 
     }
+
 
 
 }
