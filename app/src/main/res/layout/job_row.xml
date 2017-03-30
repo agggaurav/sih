@@ -8,7 +8,7 @@
 
     <!-- Title Of Song-->
     <TextView
-        android:id="@+id/company"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#040404"
@@ -21,7 +21,7 @@
         android:id="@+id/desc"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/company"
+        android:layout_below="@id/title"
         android:textColor="#343434"
         android:textSize="10dip"
         android:layout_marginTop="1dip"

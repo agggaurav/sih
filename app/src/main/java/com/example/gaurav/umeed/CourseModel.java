@@ -12,6 +12,9 @@ public class CourseModel implements Parcelable {
     String name;
     String category;
     String detail;
+    String enrolled;
+    String date;
+    String id;
 
     public CourseModel(String founder,String name,String category)
     {
@@ -44,6 +47,13 @@ public class CourseModel implements Parcelable {
         return founder;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName()
     {
@@ -79,6 +89,21 @@ public class CourseModel implements Parcelable {
         this.detail=detail;
     }
 
+    public String getEnrolled() {
+        return enrolled;
+    }
+
+    public void setEnrolled(String enrolled) {
+        this.enrolled = enrolled;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     @Override
     public int describeContents() {

@@ -46,7 +46,7 @@ public class JobFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.social_layout, container, false);
         load_jobs=Constants.ip;
-        load_jobs=load_jobs+"loadjobs/";
+        load_jobs=load_jobs+"jobs/0/";
         lv=(ListView)view.findViewById(R.id.list_job);
         searchjob=(EditText)view.findViewById(R.id.search_job);
         searchbtn=(Button)view.findViewById(R.id.jobbtn);
@@ -69,7 +69,7 @@ public class JobFragment extends Fragment {
                 // Include dialog.xml file
                 dialog.setContentView(R.layout.job_dialog);
                 // Set dialog title
-                dialog.setTitle("Custom Dialog");
+                dialog.setTitle(obj.getTitle());
                 TextView companyName=(TextView) dialog.findViewById(R.id.companyName);
                 TextView companyAddress=(TextView) dialog.findViewById(R.id.companyAddress);
                 TextView category=(TextView) dialog.findViewById(R.id.category);
@@ -77,6 +77,11 @@ public class JobFragment extends Fragment {
                 TextView jobDesc=(TextView) dialog.findViewById(R.id.jobDesc);
                 TextView vacancies=(TextView) dialog.findViewById(R.id.vacancies);
                 TextView last_date=(TextView) dialog.findViewById(R.id.last_date);
+                companyName.setText(obj.getCompany());
+                companyAddress.setText(obj.getLocation());
+                jobDesc.setText(obj.getDesc());
+                vacancies.setText(obj.getVacancies());
+                last_date.setText(obj.getLast_date());
                 Button apply=(Button) dialog.findViewById(R.id.applyjob);
                 dialog.show();
                 apply.setOnClickListener(new View.OnClickListener() {
@@ -119,10 +124,17 @@ public class JobFragment extends Fragment {
                                 JSONObject job = (JSONObject) response
                                         .get(i);
 
-                                String company = job.getString("companyfrom");
+                                String company = job.getString("company_from");
                                 String desc = job.getString("description");
                                 String vacancies = job.getString("vacancies");
-                                JobModel model=new JobModel(company,desc,vacancies);
+                                String title=job.getString("title");
+                                String date_of_posting=job.getString("date_of_posting");
+                                String last_date=job.getString("last_date");
+                                String location=job.getString("location");
+                                String stipend=job.getString("stipend");
+                                String job_id=job.getString("id");
+
+                                JobModel model=new JobModel(job_id,company,desc,vacancies,stipend,location,title,last_date,date_of_posting);
 
                                 jsonResponse += "Name: " + company + "\n\n";
                                 jsonResponse += "Founder: " + desc + "\n\n";
@@ -143,8 +155,7 @@ public class JobFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("load job", "Error: " + error.getMessage());
-                Toast.makeText(getActivity(),
-                        error.getMessage(), Toast.LENGTH_SHORT).show();
+            //    Toast.makeText(getActivity(),error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

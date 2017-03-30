@@ -1,10 +1,8 @@
 package com.example.gaurav.umeed;
 
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -13,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,31 +23,27 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import java.lang.reflect.Array;
-import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Gaurav on 25-03-2017.
+ * Created by Gaurav on 29-03-2017.
  */
-public class JobFormFragment extends Fragment {
+public class EditJobFragment extends Fragment {
 
-    EditText jobDesc,jobLoc,jobVacancies,jobStipend;
-    TextView jobSkills;
-    Button submit;
-    Button addskill;
-    EditText skillset;
     public static String POSTJOB_URL = "";
+    public static String POSTJOBSKILL_URL = "";
+    EditText title,description,vacancies,location,stipend;
+    TextView skills;
+    Button update;
     ArrayList<String> values =new  ArrayList<String>();
     ArrayAdapter<String> mArrayAdapter;
     Boolean checked;
-    ArrayList<String> skills = new ArrayList<String>();
-  // public static Button last_date;
-   // private Date dob;
+    ArrayList<String> skill = new ArrayList<String>();
+    Button addskill;
+    JobModel job;
+    //
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,26 +51,46 @@ public class JobFormFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.jobform_layout, container, false);
         POSTJOB_URL=Constants.ip;
-        POSTJOB_URL=POSTJOB_URL+"jobs/0/";
-        jobDesc=(EditText)view.findViewById(R.id.description);
-        jobLoc=(EditText)view.findViewById(R.id.location);
-        jobVacancies=(EditText)view.findViewById(R.id.vacancies);
-        jobStipend=(EditText)view.findViewById(R.id.stipend);
-        jobSkills=(TextView)view.findViewById(R.id.skills_require);
-        submit=(Button)view.findViewById(R.id.create_job);
-        skillset=(EditText)view.findViewById(R.id.skillset);
+
+        POSTJOBSKILL_URL=Constants.ip;
+
+        Bundle bundle = getArguments();
+        job= (JobModel) bundle.getParcelable("jb");
+        POSTJOB_URL=POSTJOB_URL+"jobid/"+job.getJob_id()+"/";
+        POSTJOBSKILL_URL=POSTJOBSKILL_URL+"jobskill/"+job.getJob_id()+"/";
+        title=(EditText)view.findViewById(R.id.title);
+        description=(EditText)view.findViewById(R.id.description);
+        location=(EditText)view.findViewById(R.id.location);
+        vacancies=(EditText)view.findViewById(R.id.vacancies);
+        stipend=(EditText)view.findViewById(R.id.stipend);
+        skills=(TextView)view.findViewById(R.id.skills_require);
+        update=(Button)view.findViewById(R.id.create_job);
         addskill=(Button)view.findViewById(R.id.addskill);
-//        last_date=(Button)view.findViewById(R.id.datePickerButton);
-        values.add("css");
-        values.add("php");
-        values.add("c++");
+title.setText(job.getTitle());
+        description.setText(job.getDesc());
+        location.setText(job.getLocation());
+        vacancies.setText(job.getVacancies());
+        stipend.setText(job.getStipend());
+
+                update.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        updatejob(description.getText().toString(), location.getText().toString(), vacancies.getText().toString(), stipend.getText().toString());
+                        String skill=skills.getText().toString();
+                        if(skill.length()>1) {
+                            skill.substring(0, skill.length() - 1);
+                            createjobskill(skill);
+                        }
+                    }
+                });
+
         addskill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Dialog dialog = new Dialog(getActivity());
                 // Include dialog.xml file
                 dialog.setContentView(R.layout.skill_dialog);
-                skillset.setText("");
+                skills.setText("");
 
 
                 final String[] selectedskill = {""};
@@ -108,7 +121,7 @@ public class JobFormFragment extends Fragment {
                 submitskill.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        skillset.setText(selectedskill[0]);
+                        skills.setText(selectedskill[0]);
                         dialog.dismiss();
                     }
                 });
@@ -117,67 +130,45 @@ public class JobFormFragment extends Fragment {
             }
         });
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                String desc=jobDesc.getText().toString();
-                String loc=jobLoc.getText().toString();
-                String vacancies=jobVacancies.getText().toString();
-                String stipend=jobStipend.getText().toString();
-                String skill=jobSkills.getText().toString();
-                if(skill.length()>1) {
-                    skill.substring(0, skill.length() - 1);
-                }
-                    createjob(desc, loc, vacancies, stipend);
-                createjobskill(skill);
-            }
-        });
-
-/*        last_date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogFragment newFragment = new AspirantSignUp.DatePickerFragment();
-                newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
-            }
-        });
-  */      return view;
+        return view;
     }
 
 
-public void createjob(final String desc, final String loc, final String vacancies, final String stipend)
-{
-    StringRequest stringRequest = new StringRequest(Request.Method.POST, POSTJOB_URL,
-            new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    Toast.makeText(getActivity(),response,Toast.LENGTH_LONG).show();
-                }
-            },
-            new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getActivity(),error.toString(), Toast.LENGTH_LONG).show();
-                }
-            }){
-        @Override
-        protected Map<String,String> getParams(){
-            Map<String,String> params = new HashMap<String, String>();
-            params.put("companyfrom","1");
-            params.put("description",desc);
-            params.put("vacancies", vacancies);
-          //  params.put("skill",skill);
-            params.put("stipend",stipend);
-            params.put("location",loc);
+
+    public void updatejob(final String desc, final String loc, final String vacancies, final String stipend)
+    {
+        StringRequest stringRequest = new StringRequest(Request.Method.PUT, POSTJOB_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(getActivity(), response, Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(),error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("companyfrom","1");
+                params.put("description",desc);
+                params.put("vacancies", vacancies);
+                //  params.put("skill",skill);
+                params.put("stipend",stipend);
+                params.put("location",loc);
 //            params.put("last_date",String.valueOf(Date.valueOf(last_date.getText().toString())));
-            return params;
-        }
+                return params;
+            }
 
-    };
+        };
 
-    RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-    requestQueue.add(stringRequest);
-}
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
+    }
 
 
     public void createjobskill(final String skill) {
@@ -185,7 +176,7 @@ public void createjob(final String desc, final String loc, final String vacancie
         for (int k = 0; k < skilllist.length; k++)
         {
             final int finalK = k;
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, POSTJOB_URL,
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, POSTJOBSKILL_URL,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -202,7 +193,7 @@ public void createjob(final String desc, final String loc, final String vacancie
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("name", skilllist[finalK]);
-                    params.put("job_from","1");//this needs to be changed
+                    params.put("job_from",job.getJob_id());//this needs to be changed
 //            params.put("last_date",String.valueOf(Date.valueOf(last_date.getText().toString())));
                     return params;
                 }
@@ -214,12 +205,7 @@ public void createjob(final String desc, final String loc, final String vacancie
         }
 
     }
+
+
+
     }
-
-
-
-
-
-
-
-

@@ -5,52 +5,62 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="5dp"
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Company Name"
+        android:layout_margin="5dp"
         android:id="@+id/companyName"/>
 <TextView
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="Company Address"
+    android:layout_margin="5dp"
     android:id="@+id/companyAddress"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Category"
+        android:layout_margin="5dp"
         android:id="@+id/category"/>
 
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Company Introduction"
+        android:layout_margin="5dp"
         android:id="@+id/companyIntro"/>
 <TextView
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="Job Description"
+    android:layout_margin="5dp"
     android:id="@+id/jobDesc"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="vacancies"
+        android:layout_margin="5dp"
         android:id="@+id/vacancies"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="last date"
+        android:layout_margin="5dp"
         android:id="@+id/last_date"/>
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="APPLY"
+        android:layout_margin="5dp"
+        android:layout_gravity="center"
         android:id="@+id/applyjob"/>
     </LinearLayout>
 </ScrollView>

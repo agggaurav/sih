@@ -1,6 +1,5 @@
 package com.example.gaurav.umeed;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -26,18 +24,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Created by Ratan on 7/29/2015.
+ * Created by Gaurav on 28-03-2017.
  */
-public class CourseFragment extends Fragment {
+public class EnrolledCoursesFragment extends Fragment {
 
     ArrayList<CourseModel> data=new ArrayList<CourseModel>();
     ListView lv;
-    EditText searchcourse;
-    Button searchbtn;
     public String load_courses =Constants.ip;// "http://192.168.1.101:8000/course/id";
     String jsonResponse;
     CourseAdapter arrayAdapter;
@@ -49,36 +44,24 @@ public class CourseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-
-        View view = inflater.inflate(R.layout.primary_layout, container, false);
+        View view = inflater.inflate(R.layout.enrolled_course_layout, container, false);
         load_courses=Constants.ip;
         user_id="15";
-        load_courses=load_courses+"course/"+user_id+"/";
+        load_courses=load_courses+"enroll/"+user_id+"/";
         lv=(ListView)view.findViewById(R.id.list_course);
-        searchcourse=(EditText)view.findViewById(R.id.search_course);
-        searchbtn=(Button)view.findViewById(R.id.coursebtn);
         data=new ArrayList<CourseModel>();
         //data.add("css");
         //data.add("php");
         arrayAdapter =new CourseAdapter(data,getActivity());
         lv.setAdapter(arrayAdapter);
         getCourses();
-        searchbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String searchtext = searchcourse.getText().toString();
-               // data.add(searchtext);
-                arrayAdapter.notifyDataSetChanged();
-            }
-        });
 
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View v, int position,
                                     long arg3) {
-               //Intent module=new Intent(getActivity(),ModuleFragment.class);
+                //Intent module=new Intent(getActivity(),ModuleFragment.class);
                 //startActivity(module);
                 mFragmentManager = getActivity().getSupportFragmentManager();
                 mFragmentTransaction = mFragmentManager.beginTransaction();
@@ -88,9 +71,9 @@ public class CourseFragment extends Fragment {
                 bundles.putParcelable("cm", cm);
                 //bundles.putSerializable("cm", cm);
                 ModulelistFragment ldf = new ModulelistFragment ();
-               // Bundle args = new Bundle();
-               // args.putString("coursename",a);
-               ldf.setArguments(bundles);
+                // Bundle args = new Bundle();
+                // args.putString("coursename",a);
+                ldf.setArguments(bundles);
                 mFragmentTransaction.replace(R.id.containerView, ldf);
                 mFragmentTransaction.addToBackStack(null);
                 mFragmentTransaction.commit();
@@ -128,17 +111,15 @@ public class CourseFragment extends Fragment {
                                 JSONObject course = (JSONObject) response
                                         .get(i);
 
-                                String fname = course.getString("founder");
-                                String name = course.getString("name");
-                                String category = course.getString("category");
-                                String description=course.getString("description");
+                                String date = course.getString("enrolled_on");
+                                String completion = course.getString("completion");
+                                String id = course.getString("course_enrolled");
+                                //String description=course.getString("description");
 
-                                jsonResponse += "Name: " + name + "\n\n";
-                                jsonResponse += "Founder: " + fname + "\n\n";
-                                jsonResponse += "Category: " + category + "\n\n";
-                                CourseModel cm=new CourseModel(fname,name,category);
-                                cm.setDetail(description);
-                               data.add(cm);
+                                CourseModel cm=new CourseModel("fname","name","category");
+                                cm.setId(id);
+                                cm.setDate(date);
+                                data.add(cm);
                                 arrayAdapter.notifyDataSetChanged();
                             }
 

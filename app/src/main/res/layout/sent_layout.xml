@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ScrollView
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:id="@+id/scv">
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
     android:orientation="vertical">
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:layout_marginTop="55dp"
+        android:textSize="20sp"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:id="@+id/profle_name"
         android:textColor="@android:color/holo_red_light"/>
@@ -22,8 +25,8 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:layout_marginTop="55dp"
+        android:textSize="20sp"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:id="@+id/profle_age"
         android:textColor="@android:color/holo_red_light"/>
@@ -31,8 +34,8 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:layout_marginTop="55dp"
+        android:textSize="20sp"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:id="@+id/profle_address"
         android:textColor="@android:color/holo_red_light"/>
@@ -40,12 +43,38 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:layout_marginTop="55dp"
+        android:textSize="20sp"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:id="@+id/profle_contact"
         android:textColor="@android:color/holo_red_light"/>
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:id="@+id/profile_email"
+        android:textColor="@android:color/holo_red_light"/>
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:id="@+id/skill_gained"
+        android:textColor="@android:color/holo_red_light"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/enrolled_courses"/>
+
 </LinearLayout>
-    </ScrollView>
-</RelativeLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

@@ -13,11 +13,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ModuleFragment"
@@ -27,11 +23,34 @@
         <activity
             android:name=".Company_home"
             android:label="@string/title_activity_company_home" >
-
         </activity>
         <activity
             android:name=".Tutor"
             android:label="@string/title_activity_tutor" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".AspirantSignUp"
+            android:label="@string/app_name" >
+
+        </activity>
+        <activity
+            android:name=".NGOSignUp"
+            android:label="@string/app_name" >
+
+        </activity>
+        <activity
+            android:name=".OrganizationsignUp"
+            android:label="@string/app_name" >
+
+        </activity>
+        <activity
+            android:name=".SignUpChoosingActivity"
+            android:label="@string/app_name" >
 
         </activity>
     </application>

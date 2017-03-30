@@ -67,7 +67,7 @@ public class TutorTabFragment extends Fragment {
             switch (position){
                 case 0 : return new AddCourseFragment();
                 case 1 : return new PreviousCoursesFragment();
-                case 2 : return new FindIndustryFragment();
+                case 2 : return new JobFragment();
             }
             return null;
         }

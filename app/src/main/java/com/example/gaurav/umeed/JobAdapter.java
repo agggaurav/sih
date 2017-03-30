@@ -18,7 +18,7 @@ private ArrayList<JobModel> JobSet;
 
 // View lookup cache
 private static class ViewHolder {
-    TextView company;
+    TextView title;
     TextView desc;
     TextView vacancies;
     //ImageView info;
@@ -58,7 +58,7 @@ private int lastPosition = -1;
 
             convertView = inflater.inflate(R.layout.job_row, parent, false);
 
-            viewHolder.company = (TextView) convertView.findViewById(R.id.company);
+            viewHolder.title = (TextView) convertView.findViewById(R.id.title);
             viewHolder.desc = (TextView) convertView.findViewById(R.id.desc);
             viewHolder.vacancies = (TextView) convertView.findViewById(R.id.vacancies);
             //viewHolder.info = (ImageView) convertView.findViewById(R.id.item_info);
@@ -76,7 +76,7 @@ private int lastPosition = -1;
   */
         lastPosition = position;
 
-        viewHolder.company.setText(JobModel.getCompany());
+        viewHolder.title.setText(JobModel.getTitle());
         viewHolder.desc.setText(JobModel.getDesc());
         viewHolder.vacancies.setText(JobModel.getVacancies());
         //viewHolder.info.setOnClickListener(this);

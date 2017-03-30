@@ -67,7 +67,7 @@ public class CompanyTabFragment extends Fragment {
         {
             switch (position){
                 case 0 : return new JobpostFragment();
-                case 1 : return new CourseFragment();
+                case 1 : return new AllCourseFragment();
                 case 2 : return new JobApplicantFragment();
             }
             return null;

@@ -11,6 +11,8 @@ public class CPModel {
     String courseId;
     String courseName;
     String duration;
+    String completion;
+    String enrolled_on;
     HashMap<String,Double> a;
 
     public CPModel()
@@ -50,5 +52,29 @@ public class CPModel {
 
     public void setDuration(String duration) {
         this.duration = duration;
+    }
+
+    public HashMap<String, Double> getA() {
+        return a;
+    }
+
+    public String getCompletion() {
+        return completion;
+    }
+
+    public String getEnrolled_on() {
+        return enrolled_on;
+    }
+
+    public void setA(HashMap<String, Double> a) {
+        this.a = a;
+    }
+
+    public void setCompletion(String completion) {
+        this.completion = completion;
+    }
+
+    public void setEnrolled_on(String enrolled_on) {
+        this.enrolled_on = enrolled_on;
     }
 }

@@ -16,6 +16,8 @@ public class ModuleModel implements Parcelable {
     String module_description;
     String video_path;
     String module_id;
+    String date;
+    String duration;
 
 
     public ModuleModel(String module_id,String main_course,String module_name,String module_description,String video_path)

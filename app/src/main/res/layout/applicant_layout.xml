@@ -63,11 +63,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Experience"/>
+            android:text="Email Id"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/experience"/>
+        android:id="@+id/email"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -94,11 +95,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Interest"/>
+        android:text="Contact"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/interests"/>
+        android:id="@+id/contact"/>
 </LinearLayout>
 
     <LinearLayout

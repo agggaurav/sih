@@ -96,16 +96,17 @@ public class CPAdapter extends ArrayAdapter<CPModel> implements View.OnClickList
         //data1=viewHolder.a;
         viewHolder.name.setText(CPModel.getCourseName());
         data1=CPModel.getModelEval();
-        Toast.makeText(mContext,data1.toString(),Toast.LENGTH_SHORT).show();
-          mSeries1 = new LineGraphSeries<>(generateData(data1));
+if(data1!=null) {
+    Toast.makeText(mContext, data1.toString(), Toast.LENGTH_SHORT).show();
+    mSeries1 = new LineGraphSeries<>(generateData(data1));
 
-        viewHolder.graph.getViewport().setXAxisBoundsManual(true);
-        viewHolder.graph.getViewport().setMinX(0);
-        viewHolder.graph.getViewport().setMaxX(data1.size());
-        viewHolder.graph.getViewport().setScalable(true);
-        viewHolder.graph.getViewport().setScalableY(true);
-        viewHolder.graph.addSeries(mSeries1);
-
+    viewHolder.graph.getViewport().setXAxisBoundsManual(true);
+    viewHolder.graph.getViewport().setMinX(0);
+    viewHolder.graph.getViewport().setMaxX(data1.size());
+    viewHolder.graph.getViewport().setScalable(true);
+    viewHolder.graph.getViewport().setScalableY(true);
+    viewHolder.graph.addSeries(mSeries1);
+}
         // Return the completed view to render on screen
         return convertView;
     }

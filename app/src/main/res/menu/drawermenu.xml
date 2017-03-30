@@ -17,6 +17,8 @@
 
     <item android:title="Enrolled Courses"
         android:id="@+id/nav_item_enrolled" />
+
+
     <item android:title="Evaluations"
         android:id="@+id/nav_item_evaluations" />
     <item android:title="Training"

@@ -12,16 +12,22 @@ public class ApplicantModel implements Parcelable {
     String applicantId;
     String applicantName;
     String location;
+    String education;
+    String dob;
+    String contact;
+    String email;
+    String gender;
+
     ArrayList<String> interests;
     ArrayList<String> skills;
+    ArrayList<CPModel> courses;
 
-    public ApplicantModel(String applicantId,String applicantName,String location,ArrayList<String> interests,ArrayList<String> skills)
+    public ApplicantModel(String applicantId,String applicantName,String location)
     {
         this.applicantId=applicantId;
         this.applicantName=applicantName;
         this.location=location;
-        this.interests=interests;
-        this.skills=skills;
+
     }
 
     protected ApplicantModel(Parcel in) {
@@ -46,6 +52,90 @@ public class ApplicantModel implements Parcelable {
     public String getApplicantName()
     {
         return applicantName;
+    }
+
+    public String getApplicantId() {
+        return applicantId;
+    }
+
+    public ArrayList<CPModel> getCourses() {
+        return courses;
+    }
+
+    public ArrayList<String> getInterests() {
+        return interests;
+    }
+
+    public ArrayList<String> getSkills() {
+        return skills;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setApplicantId(String applicantId) {
+        this.applicantId = applicantId;
+    }
+
+    public void setApplicantName(String applicantName) {
+        this.applicantName = applicantName;
+    }
+
+    public void setCourses(ArrayList<CPModel> courses) {
+        this.courses = courses;
+    }
+
+    public void setInterests(ArrayList<String> interests) {
+        this.interests = interests;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setSkills(ArrayList<String> skills) {
+        this.skills = skills;
+    }
+
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     @Override

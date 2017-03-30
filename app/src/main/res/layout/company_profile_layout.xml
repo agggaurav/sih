@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="50sp"
+        android:text="Name"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+
+            android:id="@+id/name"/>
+</LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="50sp"
+            android:text="Founder"/>
+    <EditText
+    android:layout_width="match_parent"
+    android:layout_height="50sp"
+    android:text="Founder"
+    android:id="@+id/founder"/>
+</LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="50sp"
+            android:text="Address"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:text="Address"
+            android:id="@+id/address"/>
+</LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="50sp"
+            android:text="Introduction"/>
+        <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:text="Intro"
+        android:id="@+id/intro"/>
+</LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="50sp"
+            android:text="Category"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:text="Category"
+            android:id="@+id/category"/>
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="50sp"
+            android:text="Employee Count"/>
+        <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:text="Emp Count"
+        android:id="@+id/emp_count"/>
+</LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="50sp"
+            android:text="Email Id"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:text="email"
+            android:id="@+id/email"/>
+</LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="50sp"
+            android:text="Contact"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:text="mobile"
+            android:id="@+id/mobile"/>
+</LinearLayout>
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:text="OK"
+            android:id="@+id/ok"/>
+    </LinearLayout>
+</ScrollView>

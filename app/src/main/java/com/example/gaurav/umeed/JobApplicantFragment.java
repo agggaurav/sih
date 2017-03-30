@@ -33,13 +33,13 @@ public class JobApplicantFragment extends Fragment {
 
     ArrayList<ApplicantModel> data=new ArrayList<ApplicantModel>();
     ListView lv;
-    public String load_applicants =Constants.ip;// "http://192.168.1.101:8000/loadcourses/";
+    public String load_applicants ="";// "http://192.168.1.101:8000/loadcourses/";
     String jsonResponse;
     ApplicantAdapter arrayAdapter;
 
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
-
+    String company_id="1";
 
     @Nullable
     @Override
@@ -47,22 +47,17 @@ public class JobApplicantFragment extends Fragment {
 
 
         View view = inflater.inflate(R.layout.jobapplicant_layout, container, false);
+        load_applicants=Constants.ip;
+        load_applicants=load_applicants+"userapld/"+company_id+"/";
 
         lv=(ListView)view.findViewById(R.id.applicantlist);
         data=new ArrayList<ApplicantModel>();
-        //data.add("css");
-        //data.add("php");
-        ArrayList<String> interests=new ArrayList<String>();
-        interests.add("ml");
-        interests.add("big data");
-        ArrayList<String> skills=new ArrayList<String>();
-        skills.add("python");
-        ApplicantModel a=new ApplicantModel("1","Gaurav","Noida",interests,skills);
-        data.add(a);
+
+
         arrayAdapter =new ApplicantAdapter(data,getActivity());
         lv.setAdapter(arrayAdapter);
         arrayAdapter.notifyDataSetChanged();
-        //getApplicants();
+        getApplicants();
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -75,7 +70,7 @@ public class JobApplicantFragment extends Fragment {
 
                 Bundle bundles = new Bundle();
                 ApplicantModel am =(ApplicantModel) adapter.getItemAtPosition(position);
-                bundles.putParcelable("cm", am);
+                bundles.putParcelable("am", am);
                 //bundles.putSerializable("cm", cm);
                 ApplicantFragment ldf = new ApplicantFragment ();
                 // Bundle args = new Bundle();
@@ -107,18 +102,53 @@ public class JobApplicantFragment extends Fragment {
                             jsonResponse = "";
                             for (int i = 0; i < response.length(); i++) {
 
-                                JSONObject course = (JSONObject) response
-                                        .get(i);
+                                JSONObject applicant = (JSONObject) response.get(i);
 
-                                String fname = course.getString("founder");
-                                String name = course.getString("name");
-                                String category = course.getString("category");
 
-                                jsonResponse += "Name: " + name + "\n\n";
-                                jsonResponse += "Founder: " + fname + "\n\n";
-                                jsonResponse += "Category: " + category + "\n\n";
-                                //ApplicantModel cm=new ApplicantModel("1",fname,name,category);
-                                //data.add(cm);
+                                String name = applicant.getString("name");
+                                String address = applicant.getString("address");
+                                String educaion = applicant.getString("education");
+                                String dob=applicant.getString("dob");
+                                String contact=applicant.getString("phone");
+                                String email=applicant.getString("email");
+                                String gender=applicant.getString("gender");
+                                String applicant_id=applicant.getString("id");
+                                ApplicantModel am=new ApplicantModel(applicant_id,name,address);
+                                am.setEducation(educaion);
+                                am.setContact(contact);
+                                am.setEmail(email);
+                                am.setDob(dob);
+                                am.setGender(gender);
+                                ArrayList<CPModel> courselist=new ArrayList<CPModel>();
+                                ArrayList<String> skilllist=new ArrayList<String>();
+                               JSONArray enrolled_in_courses=applicant.getJSONArray("Enrolled in courses");
+                                for (int j=0;j<enrolled_in_courses.length();j++)
+                                {
+                                    JSONObject courses= enrolled_in_courses.getJSONObject(j);
+
+                                    String course_id=courses.getString("course_enrolled");
+                                    String enrolled_on=courses.getString("enrolled_on");
+                                    String completion=courses.getString("completion");
+                                    CPModel cm =new CPModel();
+                                    cm.setCourseId(course_id);
+                                    cm.setEnrolled_on(enrolled_on);
+                                    cm.setCompletion(completion);
+                                    courselist.add(cm);
+                                }
+
+                                JSONArray skill_gained=applicant.getJSONArray("Skill Gained");
+                                for (int k=0;k<skill_gained.length();k++)
+                                {
+                                    JSONObject skills=skill_gained.getJSONObject(k);
+                                    String skill_id=skills.getString("id");
+                                    String skill_name=skills.getString("name");
+                                    String percentage=skills.getString("acquired_date");
+                                    skilllist.add(skill_id);
+                                }
+
+                                am.setCourses(courselist);
+                                am.setSkills(skilllist);
+                                    data.add(am);
                                 arrayAdapter.notifyDataSetChanged();
                             }
 

@@ -8,7 +8,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-    <EditText
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:hint="Job Title"
+            android:layout_margin="5dp"
+            android:id="@+id/title"
+            />
+
+
+
+        <EditText
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:hint="Job Description"
@@ -62,6 +73,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/skillset"/>
+
+        <Button
+            android:id="@+id/datePickerButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Last Date to Apply" />
 
     <Button
     android:layout_width="wrap_content"

@@ -1,6 +1,5 @@
 package com.example.gaurav.umeed;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -26,13 +24,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Created by Ratan on 7/29/2015.
+ * Created by Gaurav on 29-03-2017.
  */
-public class CourseFragment extends Fragment {
+public class AllCourseFragment extends Fragment {
 
     ArrayList<CourseModel> data=new ArrayList<CourseModel>();
     ListView lv;
@@ -45,7 +42,7 @@ public class CourseFragment extends Fragment {
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
 
-
+String company_id="2";
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,7 +51,7 @@ public class CourseFragment extends Fragment {
         View view = inflater.inflate(R.layout.primary_layout, container, false);
         load_courses=Constants.ip;
         user_id="15";
-        load_courses=load_courses+"course/"+user_id+"/";
+        load_courses=load_courses+"loadcourses/";
         lv=(ListView)view.findViewById(R.id.list_course);
         searchcourse=(EditText)view.findViewById(R.id.search_course);
         searchbtn=(Button)view.findViewById(R.id.coursebtn);
@@ -68,17 +65,17 @@ public class CourseFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String searchtext = searchcourse.getText().toString();
-               // data.add(searchtext);
+                // data.add(searchtext);
                 arrayAdapter.notifyDataSetChanged();
             }
         });
 
-
+/*
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View v, int position,
                                     long arg3) {
-               //Intent module=new Intent(getActivity(),ModuleFragment.class);
+                //Intent module=new Intent(getActivity(),ModuleFragment.class);
                 //startActivity(module);
                 mFragmentManager = getActivity().getSupportFragmentManager();
                 mFragmentTransaction = mFragmentManager.beginTransaction();
@@ -88,9 +85,9 @@ public class CourseFragment extends Fragment {
                 bundles.putParcelable("cm", cm);
                 //bundles.putSerializable("cm", cm);
                 ModulelistFragment ldf = new ModulelistFragment ();
-               // Bundle args = new Bundle();
-               // args.putString("coursename",a);
-               ldf.setArguments(bundles);
+                // Bundle args = new Bundle();
+                // args.putString("coursename",a);
+                ldf.setArguments(bundles);
                 mFragmentTransaction.replace(R.id.containerView, ldf);
                 mFragmentTransaction.addToBackStack(null);
                 mFragmentTransaction.commit();
@@ -98,6 +95,7 @@ public class CourseFragment extends Fragment {
                 // do what you intend to do on click of listview row
             }
         });
+  */
         return view;
 
     }
@@ -138,7 +136,7 @@ public class CourseFragment extends Fragment {
                                 jsonResponse += "Category: " + category + "\n\n";
                                 CourseModel cm=new CourseModel(fname,name,category);
                                 cm.setDetail(description);
-                               data.add(cm);
+                                data.add(cm);
                                 arrayAdapter.notifyDataSetChanged();
                             }
 

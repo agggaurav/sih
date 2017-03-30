@@ -48,18 +48,31 @@ public class MainActivity extends AppCompatActivity{
 
                  if (menuItem.getItemId() == R.id.nav_item_home) {
                      FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                     fragmentTransaction.replace(R.id.containerView,new TabFragment()).commit();
+                     fragmentTransaction.replace(R.id.containerView,new TabFragment());
+                     fragmentTransaction.addToBackStack(null);
+                     fragmentTransaction.commit();
 
                  }
 
                 if (menuItem.getItemId() == R.id.nav_item_profile) {
                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                    xfragmentTransaction.replace(R.id.containerView,new ProfileFragment()).commit();
+                    xfragmentTransaction.replace(R.id.containerView, new ProfileFragment());
+                    xfragmentTransaction.addToBackStack(null);
+                    xfragmentTransaction.commit();
                 }
 
                  if(menuItem.getItemId() == R.id.nav_item_recommend) {
                      FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
-                     xfragmentTransaction.replace(R.id.containerView,new ProfileFragment()).commit();
+                     xfragmentTransaction.replace(R.id.containerView,new ProfileFragment());
+                     xfragmentTransaction.addToBackStack(null);
+                     xfragmentTransaction.commit();
+                 }
+
+                 if(menuItem.getItemId() == R.id.nav_item_enrolled) {
+                     FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+                     xfragmentTransaction.replace(R.id.containerView,new EnrolledCoursesFragment());
+                     xfragmentTransaction.addToBackStack(null);
+                     xfragmentTransaction.commit();
                  }
 
                  return false;

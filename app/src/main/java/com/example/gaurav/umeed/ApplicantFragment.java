@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ public class ApplicantFragment extends Fragment {
     ListView lv;
     ArrayList<CPModel> data=new ArrayList<CPModel>();
     CPAdapter arrayAdapter;
+    TextView applicantName,location,education,app_email,skills,contact;
 
 
     @Nullable
@@ -28,27 +30,34 @@ public class ApplicantFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.applicant_layout, container, false);
 
-            lv=(ListView)view.findViewById(R.id.courses);
+        Bundle bundle = getArguments();
+        ApplicantModel applicant= (ApplicantModel) bundle.getParcelable("am");
 
-        data=new ArrayList<CPModel>();
-        CPModel cp=new CPModel();
-        HashMap<String,Double> marks=new HashMap<>();
-        marks.put("module1",5.0);
-        marks.put("module2",10.0);
-        marks.put("module3",4.0);
-        cp.setCourseId("1");
-        cp.setCourseName("Web DEvelopment");
-        cp.setDuration("2 months");
-        cp.setModelEval(marks);
-        data.add(cp);
-        arrayAdapter =new CPAdapter(data,getActivity());
-        lv.setAdapter(arrayAdapter);
-        CPModel cp2=new CPModel();
-        cp2.setCourseId("2");
-        cp2.setCourseName("Angular js");
-        cp2.setDuration("2 months");
-        cp2.setModelEval(marks);
-        data.add(cp2);
+        applicantName=(TextView)view.findViewById(R.id.name);
+        location=(TextView)view.findViewById(R.id.location);
+        education=(TextView)view.findViewById(R.id.education);
+        app_email=(TextView)view.findViewById(R.id.email);
+        skills=(TextView)view.findViewById(R.id.skills);
+        contact=(TextView)view.findViewById(R.id.contact);
+        lv=(ListView)view.findViewById(R.id.courses);
+
+        applicantName.setText(applicant.getApplicantName());
+        location.setText(applicant.getLocation());
+        education.setText(applicant.getEducation());
+        app_email.setText(applicant.getEmail());
+        contact.setText(applicant.getContact());
+        skills.setText("");
+if(applicant.getSkills()!=null) {
+    for (int i = 0; i < applicant.getSkills().size(); i++) {
+        skills.append(applicant.getSkills().get(i));
+    }
+}
+
+        data=applicant.getCourses();
+if(data!=null) {
+    arrayAdapter = new CPAdapter(data, getActivity());
+    lv.setAdapter(arrayAdapter);
+}
         arrayAdapter.notifyDataSetChanged();
         return view;
     }
